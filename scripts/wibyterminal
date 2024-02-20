@@ -1,0 +1,17 @@
+#!/bin/bash
+
+# Check if a query was provided
+if [ $# -eq 0 ]; then
+	echo "Usage: $0 'search query'"
+	exit 1
+fi
+
+# Replace spaces with plus signs to format the search query for URLs
+query=$(echo "$1" | sed 's/ /+/g')
+
+# Fetch the search results from wiby.me
+response=$(curl -s "https://wiby.me/?q=$query")
+
+# Parse the results to extract URLs and their associated text snippets
+# This simplistic approach may need adjustment based on wiby.me's actual HTML structure
+echo "$response" | grep -oP 'href="https?://[^"]+[^>]+>|<p>[^<]+' | sed -e 's/href="//' -e 's/">/ /' -e 's/<\/a>/ /' -e 's/<p>//' | wiby_format.py
