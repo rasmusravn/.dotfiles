@@ -1,5 +1,4 @@
 alias cat bat
-alias news newsboat
 alias rm "rm -i"
 alias ml himalaya
 alias mlr "himalaya read"
@@ -16,12 +15,8 @@ set -Ux EDITOR nvim
 if status is-interactive
     # Commands to run in interactive sessions can go here
 end
-function mn
-    set filename ~/saml/hurtige/(date +'%y-%m-%d_%H_')$argv[1].md
-    nvim $filename
-end
-function mnd
-    set filename ~/saml/{$argv[1]}/(date +'%y-%m-%d_%H_')$argv[2].md
+function note
+    set filename ~/Dokumenter/rasmussi/00-inbox/(date +'%y%m%d')-$argv[1].md
     nvim $filename
 end
 pyenv init - | source
@@ -31,3 +26,12 @@ status --is-interactive; and pyenv virtualenv-init - | source
 
 # add scripts to path
 set -Ux fish_user_paths $fish_user_paths ~/.dotfiles/scripts/
+
+
+function nb --wraps newsboat
+    kitty @ set-spacing margin-h=250
+    kitty @ set-font-size 16
+    newsboat
+    kitty @ set-font-size 12
+    kitty @ set-spacing margin-h=0
+end

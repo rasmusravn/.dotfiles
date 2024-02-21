@@ -158,4 +158,3 @@ output * background /home/rasmus/Hentet/theonering.jpg fill
 
 exec swaymsg "workspace 1; exec kitty"
 exec swaymsg "workspace 2; exec firefox"
-exec swaymsg "workspace 3; exec code"
